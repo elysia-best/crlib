@@ -266,6 +266,10 @@ struct Platform : public Singleton <Platform> {
       ::abort ();
    }
 
+#if defined(CR_ANDROID)
+#   undef bzero
+#endif
+
    // anologue of memset
    template <typename U> void bzero (U *ptr, size_t len) noexcept {
       memset (reinterpret_cast <void *> (ptr), 0, len);
