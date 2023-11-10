@@ -12,6 +12,9 @@ CR_NAMESPACE_BEGIN
 // detects the build platform
 #if defined(__linux__)
 #  define CR_LINUX
+#  if defined(__ANDROID__)
+#    define CR_ANDROID
+#  endif
 #elif defined(__APPLE__)
 #  define CR_OSX
 #elif defined(_WIN32)
@@ -62,6 +65,18 @@ CR_NAMESPACE_BEGIN
 
 #if defined (CR_ARCH_ARM32) || defined (CR_ARCH_ARM64)
 #   define CR_ARCH_ARM
+#endif
+
+#if defined(__powerpc__)
+#  define CR_ARCH_PPC32
+#elif defined(__powerpc64__)
+#  define CR_ARCH_PPC64
+#elif defined(__ppc64__)
+#  define CR_ARCH_PPC64EL
+#endif
+
+#if defined (CR_ARCH_PPC32) || defined (CR_ARCH_PPC64) || defined (CR_ARCH_PPC64EL)
+#   define CR_ARCH_PPC
 #endif
 
 #if !defined(CR_DISABLE_SIMD)
