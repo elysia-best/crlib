@@ -38,7 +38,7 @@ public:
 
 private:
    void detect () {
-#if !defined (CR_ARCH_ARM)
+#if !defined (CR_ARCH_ARM) && !defined (CR_ARCH_PPC)
       enum { eax, ebx, ecx, edx, regs };
 
       uint32_t data[regs] {};

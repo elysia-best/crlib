@@ -51,9 +51,9 @@ CR_NAMESPACE_BEGIN
 #  error "Can't configure export macros. Compiler unrecognized."
 #endif
 
-#if defined(__x86_64) || defined(__x86_64__) || defined(__amd64__) || defined(__amd64) || defined (__aarch64__) || (defined(_MSC_VER) && defined(_M_X64))
+#if defined(__x86_64) || defined(__x86_64__) || defined(__amd64__) || defined(__amd64) || defined (__aarch64__) || (defined(_MSC_VER) && defined(_M_X64)) || defined(__powerpc64__)
 #  define CR_ARCH_X64
-#elif defined(__i686) || defined(__i686__) || defined(__i386) || defined(__i386__) || defined(i386) || (defined(_MSC_VER) && defined(_M_IX86))
+#elif defined(__i686) || defined(__i686__) || defined(__i386) || defined(__i386__) || defined(i386) || (defined(_MSC_VER) && defined(_M_IX86)) || defined(__powerpc__)
 #  define CR_ARCH_X86
 #endif
 
@@ -67,20 +67,18 @@ CR_NAMESPACE_BEGIN
 #   define CR_ARCH_ARM
 #endif
 
-#if defined(__powerpc__)
-#  define CR_ARCH_PPC32
-#elif defined(__powerpc64__)
+#if defined(__powerpc64__)
 #  define CR_ARCH_PPC64
-#elif defined(__ppc64__)
-#  define CR_ARCH_PPC64EL
+#elif defined(__powerpc__)
+#  define CR_ARCH_PPC32
 #endif
 
-#if defined (CR_ARCH_PPC32) || defined (CR_ARCH_PPC64) || defined (CR_ARCH_PPC64EL)
+#if defined (CR_ARCH_PPC32) || defined (CR_ARCH_PPC64)
 #   define CR_ARCH_PPC
 #endif
 
 #if !defined(CR_DISABLE_SIMD)
-#  if !defined (CR_ARCH_ARM)
+#  if !defined (CR_ARCH_ARM) && !defined (CR_ARCH_PPC)
 #     define CR_HAS_SIMD_SSE
 #  else
 #     undef CR_HAS_SIMD_NEON
@@ -114,7 +112,7 @@ CR_NAMESPACE_BEGIN
 #  define __PLACEMENT_NEW_INLINE
 #endif
 
-#if (defined (CR_CXX_MSVC) && !defined (CR_CXX_CLANG)) || defined (CR_ARCH_ARM)
+#if (defined (CR_CXX_MSVC) && !defined (CR_CXX_CLANG)) || defined (CR_ARCH_ARM) || defined (CR_ARCH_PPC)
 #  define CR_SIMD_TARGET(dest) CR_FORCE_INLINE
 #  define CR_SIMD_TARGET_AIL(dest) CR_FORCE_INLINE
 #else
@@ -123,7 +121,7 @@ CR_NAMESPACE_BEGIN
 #endif
 
 // set the minimal glibc as we can
-#if defined (CR_ARCH_ARM64)
+#if defined (CR_ARCH_ARM64) || defined (CR_ARCH_PPC64)
 #  define GLIBC_VERSION_MIN "2.17"
 #elif defined (CR_ARCH_ARM32)
 #  define GLIBC_VERSION_MIN "2.4"
