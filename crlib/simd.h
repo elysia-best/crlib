@@ -13,7 +13,11 @@
 #  if defined (CR_ARCH_ARM)
 #     include <crlib/simd/sse2neon.h>
 #  else
-#     include <smmintrin.h>
+#     if defined(__loongarch64)
+#        include <crlib/simd/sse2lsx.h>
+#     else
+#        include <smmintrin.h>
+#     endif
 #  endif
 #elif defined (CR_HAS_SIMD_NEON)
 #  include <arm_neon.h>
