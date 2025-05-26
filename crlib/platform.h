@@ -51,7 +51,7 @@ CR_NAMESPACE_BEGIN
 #  error "Can't configure export macros. Compiler unrecognized."
 #endif
 
-#if defined(__x86_64) || defined(__x86_64__) || defined(__amd64__) || defined(__amd64) || defined (__aarch64__) || (defined(_MSC_VER) && defined(_M_X64)) || defined(__powerpc64__)
+#if defined(__x86_64) || defined(__x86_64__) || defined(__amd64__) || defined(__amd64) || defined (__aarch64__) || (defined(_MSC_VER) && defined(_M_X64)) || defined(__powerpc64__) || defined (__loongarch64)
 #  define CR_ARCH_X64
 #elif defined(__i686) || defined(__i686__) || defined(__i386) || defined(__i386__) || defined(i386) || (defined(_MSC_VER) && defined(_M_IX86)) || defined(__powerpc__)
 #  define CR_ARCH_X86
