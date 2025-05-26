@@ -73,12 +73,16 @@ CR_NAMESPACE_BEGIN
 #  define CR_ARCH_PPC32
 #endif
 
+#if defined (__loongarch64)
+#  define CR_ARCH_LOONGARCH64
+#endif
+
 #if defined (CR_ARCH_PPC32) || defined (CR_ARCH_PPC64)
 #   define CR_ARCH_PPC
 #endif
 
 #if !defined(CR_DISABLE_SIMD)
-#  if !defined (CR_ARCH_ARM) && !defined (CR_ARCH_PPC)
+#  if !defined (CR_ARCH_ARM) && !defined (CR_ARCH_PPC) && !defined (CR_ARCH_LOONGARCH64)
 #     define CR_HAS_SIMD_SSE
 #  else
 #     undef CR_HAS_SIMD_NEON
