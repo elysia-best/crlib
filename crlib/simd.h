@@ -14,7 +14,7 @@
 #     include <crlib/simd/sse2neon.h>
 #  elif defined (CR_ARCH_LOONGARCH64)
 #     define SIMDE_ENABLE_NATIVE_ALIASES 
-#     include <simde/x86/sse4.1.h>
+#     include <crlib/simde/x86/sse4.1.h>
 #  else
 #     include <smmintrin.h>
 #  endif
