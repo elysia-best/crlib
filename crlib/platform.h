@@ -82,7 +82,7 @@ CR_NAMESPACE_BEGIN
 #endif
 
 #if !defined(CR_DISABLE_SIMD)
-#  if !defined (CR_ARCH_ARM) && !defined (CR_ARCH_PPC) && !defined (CR_ARCH_LOONGARCH64)
+#  if !defined (CR_ARCH_ARM) && !defined (CR_ARCH_PPC)
 #     define CR_HAS_SIMD_SSE
 #  else
 #     undef CR_HAS_SIMD_NEON
